@@ -95,15 +95,15 @@ autocomplete টা দেখুন:
 আনা raw কন্টেন্ট  পরিবর্তন করে। এইভাবে আপনার সাইটের প্রয়োজনীয় সকল
 সোর্সিং এবং ট্রান্সফর্মেশন পরিচালনা করতে পারবেন।
 
-## Create a list of your site's markdown files in `src/pages/index.js`
+## আপনার সাইটের মার্কডাউন ফাইলসমুহের লিস্ট `src/pages/index.js` এ তৈরি করুন
 
-Now you'll have to create a list of your markdown files on the front page. Like many
-blogs, you want to end up with a list of links on the front page pointing to each
-blog post. With GraphQL you can _query_ for the current list of markdown blog
-posts so you won't need to maintain the list manually.
+এখন প্রথম পেইজে আপনার মার্কডাউন ফাইল সমূহের লিস্ট তৈরি করতে হবে। অন্য অনেক ব্লগের
+মত, আপনি হয়তো প্রথম পেইজে এমন লিংকের লিস্ট চাইবেন যা ব্লগপোস্ট গুলোকে পয়েন্ট করবে।
+GraphQL এর মাধ্যমে বর্তমান মার্কডাউন ব্লগপোস্ট সমূহের লিস্ট মেনুয়ালি মেইন্টেইন
+না করে _query_ করে পেতে পারেন।
 
-Like with the `src/pages/my-files.js` page, replace `src/pages/index.js` with
-the following to add a GraphQL query with some initial HTML and styling.
+`src/pages/my-files.js` এর যেভাবে করেছিলেন সেভাবে, `src/pages/index.js` কে নিচের
+GraphQL query সাথে কিছু প্রাথমিক HTML এবং styling কোড দিয়ে  রিপ্লেস করুন।
 
 ```jsx:title=src/pages/index.js
 import React from "react"
@@ -169,12 +169,12 @@ export const query = graphql`
 `
 ```
 
-Now the frontpage should look like:
+এখন প্রথম পেইজ দেখতে এমন হবে:
 
 ![frontpage](frontpage.png)
 
-But your one blog post looks a bit lonely. So let's add another one at
-`src/pages/pandas-and-bananas.md`
+কিন্তু আপনার একটা ব্লগপোস্টকে একটু একা একা লাগছে। তাই চলুন আরো একটা ব্লগপোস্ট 
+`src/pages/pandas-and-bananas.md` এ যোগ করি।
 
 ```markdown:title=src/pages/pandas-and-bananas.md
 ---
@@ -190,22 +190,22 @@ seem to really enjoy bananas!
 
 ![two-posts](two-posts.png)
 
-Which looks great! Except… the order of the posts is wrong.
+এটা দারুন দেখাচ্ছে! শুধু... পোস্টের অর্ডার ঠিক নেই।
 
-But this is easy to fix. When querying a connection of some type, you can pass a
-variety of arguments to the GraphQL query. You can `sort` and `filter` nodes, set how
-many nodes to `skip`, and choose the `limit` of how many nodes to retrieve. With
-this powerful set of operators, you can select any data you want—in the format you
-need.
+কিন্তু এটা খুব সহজে ঠিক করা যায়। যখন কোনো টাইপের কানেকশন query করবেন, আপনি
+বিভিন্ন প্রকার আর্গুমেন্ট GraphQL query তে পাঠাতে পারেন। আপনি নোডগুলো `sort` এবং `filter`
+করতে পারেন, কতগুলো নোড `skip` করবে নির্দিস্ট করে দিতে পারেন, এবং কয়টি নোড আনবেন সেই `limit`
+নির্দিস্ট করে দিতে পারেন। এই শক্তিশালী অপারেটরের সেট ব্যবহার করে আপনি আপনার প্রয়োজনীয় যেকোন ডেটা,
+যেকোনো ফরমেটে পেতে পারেন।
 
-In your index page's GraphQL query, change `allMarkdownRemark` to
-`allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC })`. _Note: There are 3 underscores between `frontmatter` and `date`._ Save
-this and the sort order should be fixed.
+আপনার index পেইজে GraphQL query তে `allMarkdownRemark` কে
+`allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC })` এ পরিবর্তন করুন। _নোট: এখানে `frontmatter` এবং`date` এর মধ্যে ৩ টা আন্ডারস্কোর  আছে।_ এটা
+সেইভ করুন, এর মাধ্যমে সর্ট অর্ডার ঠিক হয়ে যাবে।
 
-Try opening GraphiQL and playing with different sort options. You can sort the
-`allFile` connection along with other connections.
+GraphiQL ওপেন করে বিভিন্ন সর্ট অপশন চেস্টা করে দেখুন। আপনি `allFile` কানেশন
+সহ সকল কানেকশন সর্ট করতে পারবেন।
 
-For more documentation on our query operators, explore our [GraphQL reference guide.](/docs/graphql-reference/)
+Query অপারেটর সমূহের আরো ডকুমেন্টেশনের জন্য, আমাদের [GraphQL রেফারেন্স গাইড](/docs/graphql-reference/) ঘুরে দেখতে পারেন।
 
 ## Challenge
 
