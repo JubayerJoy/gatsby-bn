@@ -1,31 +1,31 @@
 ---
-title: Transformer plugins
+title: ট্রান্সফর্মার প্লাগিনসমূহ
 typora-copy-images-to: ./
 disableTableOfContents: true
 ---
 
-> This tutorial is part of a series about Gatsby’s data layer. Make sure you’ve gone through [part 4](/tutorial/part-four/) and [part 5](/tutorial/part-five/) before continuing here.
+> এই টিউটোরিয়ালটি Gatsby এর ডাটা লেয়ার সম্পর্কিত সিরিজের অংশ। [পার্ট ৪](/tutorial/part-four/) এবং [পার্ট ৫](/tutorial/part-five/) সম্পন্ন করেছেন কিনা নিশ্চিত হয়ে এটি শুরু করুন।
 
-## What's in this tutorial?
+## কি আছে এই টিউটোরিয়ালে?
 
-The previous tutorial showed how source plugins bring data _into_ Gatsby’s data system. In this tutorial, you'll learn how transformer plugins _transform_ the raw content brought by source plugins. The combination of source plugins and transformer plugins can handle all data sourcing and data transformation you might need when building a Gatsby site.
+এর আগের টিউটোরিয়ালে দেখানো হয়েছে কিভাবে সোর্স প্লাগিন সমূহ ডেটা Gatsby এর ডেটা সিস্টেমে _নিয়ে আসে_। এই টিউটোরিয়ালে আপনি শিখবেন, কিভাবে সোর্স প্লাগিন সমূহের নিয়ে আসা raw ডেটা ট্রান্সফর্মার প্লাগিন সমূহ _পরিবর্তন_ করে। Gatsby সাইট তৈরির সময় সোর্স প্লাগিন এবং ট্রান্সফর্মার প্লাগিনের সমন্বয় করে প্রয়োজনীয় সকল ডেটা সোর্সিং এবং ডেটা পরিবর্তন নিয়ন্ত্রণ করতে পারবেন।
 
-## Transformer plugins
+## ট্রান্সফর্মার প্লাগিনসমূহ
 
-Often, the format of the data you get from source plugins isn't what you want to
-use to build your website. The filesystem source plugin lets you query data
-_about_ files but what if you want to query data _inside_ files?
+প্রায়শই, আপনার সাইট তৈরির সময় সোর্স প্লাগিনের মাধ্যমে প্রাপ্ত ডেটার ফরমেট দরকার
+মতো হয় না। ফাইলসিস্টেম সোর্স প্লাগিন আপনাকে ফাইলের _সম্পর্কে_ ডেটা query করতে
+দেয় কিন্তু আপনি যদি ফাইলের _অভ্যন্তরীণ_ ডেটা query করতে চান, সেটা কিভাবে সম্ভব?
 
-To make this possible, Gatsby supports transformer plugins which take raw
-content from source plugins and _transform_ it into something more usable.
+এটা সম্ভব করতে, Gatsby ট্রান্সফর্মার প্লাগিন সাপোর্ট করে, যা সোর্স প্লাগিনসমূহের raw কন্টেট
+গ্রহণ করে সেটা _পরিবর্তন_ করে অধিক ব্যবহারযোগ্য করে তুলে।
 
-For example, markdown files. Markdown is nice to write in but when you build a
-page with it, you need the markdown to be HTML.
+উদাহরণস্বরূপ, মার্কডাউন ফাইলকেই ধরি। মার্কডাউন ফরমেটে লিখতে অনেক সুবিধা হয়,
+কিন্ত সাইট তৈরির সময় মার্কডাউনটি এইচটিএমএল (HTML) ফরমেটে থাকতে হয়।
 
-Add a markdown file to your site at
-`src/pages/sweet-pandas-eating-sweets.md` (This will become your first markdown
-blog post) and learn how to _transform_ it to HTML using transformer plugins and
-GraphQL.
+আপনার সাইটে `src/pages/sweet-pandas-eating-sweets.md` 
+এরকম একটা মার্কডাউন যোগ করুন (এটা আপনার প্রথম মার্কডাউন ব্লগপোস্ট হবে) এবং 
+কিভাবে এটাকে ট্রান্সফর্মার প্লাগিন আর GraphQL ব্যবহার করে HTML ফরমেটে _পরিবর্তন_ করবেন
+তা শিখুন।
 
 ```markdown:title=src/pages/sweet-pandas-eating-sweets.md
 ---
@@ -40,19 +40,19 @@ Here's a video of a panda eating sweets.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4n0xNbfJLR8" frameborder="0" allowfullscreen></iframe>
 ```
 
-Once you save the file, look at `/my-files/` again—the new markdown file is in
-the table. This is a very powerful feature of Gatsby. Like the earlier
-`siteMetadata` example, source plugins can live-reload data.
-`gatsby-source-filesystem` is always scanning for new files to be added and when
-they are, re-runs your queries.
+একবার ফাইলটি সেইভ করবার পরে,  `/my-files/` এ আবার দেখুন- নতুন মার্কডাউন ফাইল টেবিলে
+যুক্ত হয়েছে। এটা  Gatsby এর খুবই শক্তিশালী একটি ফিচার। আগের উদাহরণের `siteMetadata`
+মতো, সোর্স প্লাগিন ডেটা লাইভ-রিলোড করতে পারে।
+`gatsby-source-filesystem` সর্বদা নতুন ফাইল যুক্ত করার জন্য খোজ করতে থাকে এবং
+পেয়ে গেলে আপনার query গুলো পুনরায় চালায়।
 
-Add a transformer plugin that can transform markdown files:
+মার্কডাউন ফাইল সমূহ পরিবর্তন করতে পারে এমন একটা ট্রান্সফর্মার প্লাগিন যুক্ত করুন:
 
 ```shell
 npm install --save gatsby-transformer-remark
 ```
 
-Then add it to the `gatsby-config.js` like normal:
+এরপর এটাকে নরমালের মতো `gatsby-config.js` এ যুক্ত করুন:
 
 ```javascript:title=gatsby-config.js
 module.exports = {
@@ -79,21 +79,21 @@ module.exports = {
 }
 ```
 
-Restart the development server then refresh (or open again) GraphiQL and look
-at the autocomplete:
+ডেভেলপমেন্ট সার্ভার রিস্টার্ট করে GraphiQL রিফ্রেস করুন (অথবা আবার খুলুন) এবং 
+autocomplete টা দেখুন:
 
 ![markdown-autocomplete](markdown-autocomplete.png)
 
-Select `allMarkdownRemark` again and run it as you did for `allFile`. You'll
-see there the markdown file you recently added. Explore the fields that are
-available on the `MarkdownRemark` node.
+আবার `allMarkdownRemark` সিলেক্ট করুন এবং এটাকে `allFile` যেভাবে চালিয়েছিলেন
+সেভাবে চালান। আপনি সেখানে নতুন যুক্ত করা মার্কডাউন ফাইল দেখতে পাবেন।
+`MarkdownRemark` নোড এর ফিল্ড সমূহ ঘুরে দেখুন।
 
 ![markdown-query](markdown-query.png)
 
-Ok! Hopefully, some basics are starting to fall into place. Source plugins bring
-data _into_ Gatsby's data system and _transformer_ plugins transform raw content
-brought by source plugins. This pattern can handle all data sourcing and
-data transformation you might need when building a Gatsby site.
+আচ্ছা! আশা করি, কিছু বেসিক ধারণা পাচ্ছেন। Gatsby এর ডাটা সিস্টেমে
+সোর্স প্লাগিনসমূহ ডাটা _নিয়ে আসে_ এবং _ট্রান্সফর্মার_ প্লাগিনসমূহ সোর্স প্লাগিনের
+আনা raw কন্টেন্ট  পরিবর্তন করে। এইভাবে আপনার সাইটের প্রয়োজনীয় সকল
+সোর্সিং এবং ট্রান্সফর্মেশন পরিচালনা করতে পারবেন।
 
 ## Create a list of your site's markdown files in `src/pages/index.js`
 
