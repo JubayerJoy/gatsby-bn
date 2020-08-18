@@ -207,18 +207,18 @@ GraphiQL ওপেন করে বিভিন্ন সর্ট অপশন 
 
 Query অপারেটর সমূহের আরো ডকুমেন্টেশনের জন্য, আমাদের [GraphQL রেফারেন্স গাইড](/docs/graphql-reference/) ঘুরে দেখতে পারেন।
 
-## Challenge
+## চেলেঞ্জ
 
-Try creating a new page containing a blog post and see what happens to the list of blog posts on the homepage!
+একটা নতুন ব্লগপোস্ট পেইজ তৈরি করার চেস্টা করুন এবং হোম পেইজের ব্লগ পোস্টের লিস্টে কি পরিবর্তন হয় দেখুন!
 
-## What's coming next?
+## এরপর কি আসছে?
 
-This is great! You've just created a nice index page where you're querying your markdown
-files and producing a list of blog post titles and excerpts. But you don't want to just see excerpts, you want actual pages for your markdown files.
+অনেক দারুণ লাগছে! আপনি মাত্রই একটা ইন্ডেক্স পেইজ তৈরি করেছেন যেখানে আপনি মার্কডাউন ফাইল্গুলো
+query করছেন এবং একটি ব্লগপোস্টের টাইটেল এবং উদ্ধৃতাংশ (excerpt) এর লিস্ট তৈরি করছেন। কিন্তু আপনি শুধু উদ্ধৃতাংশ চান না, আপনি মার্কডাউন ফাইলের আসল পেইজ চান।
 
-You could continue to create pages by placing React components in `src/pages`. However, you'll
-next learn how to _programmatically_ create pages from _data_. Gatsby is _not_
-limited to making pages from files like many static site generators. Gatsby lets
-you use GraphQL to query your _data_ and _map_ the query results to _pages_—all at build
-time. This is a really powerful idea. You'll be exploring its implications and
-ways to use it in the next tutorial, where you'll learn how to [programmatically create pages from data](/tutorial/part-seven/).
+আপনি `src/pages` এ React কম্পোনেন্ট বসানো শেখা চালিয়ে যেতে পারেন। যাহোক, আপনি
+এরপর শিখবেন কিভাবে _প্রোগ্রামেটিকালি_ ডেটা থেকে পেইজ তৈরি করতে পারবেন। অন্যান্য স্টেটিক সাইট জেনারেটরের মতো,
+Gatsby শুধু ফাইল থেকে পেইজ তৈরিতে সীমাবদ্ধ _না_।  Gatsby আপনাকে GraphQL ব্যাবহার করে _ডেটা_ এবং _ম্যাপ_
+query করতে দেয় এবং _রেজাল্ট_ এ query করতে দেয় - সবই বিল্ডটাইমে।
+এটা অনেক শক্তিশালী কৌশল। পরের টিউটোরিয়ালে আপনি এর প্রভাব এবং
+এটা কিভাবে ব্যবহার করবেন তা দেখতে পাবেন, যেখানে আপনি শিখবেন কিভাবে [প্রোগ্রামিটিকালি ডাটা থেকে পেইজ তৈরি করে](/tutorial/part-seven/)।
